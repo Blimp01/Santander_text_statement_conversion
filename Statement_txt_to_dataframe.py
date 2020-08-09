@@ -3,9 +3,8 @@ import pickle
 import os
 #file path to Santander Statments 
 directory = "Statements"
-
+output_filename = "Santander_df.pkl"
 Santander_df = pd.DataFrame(columns = ['Date', 'Description','Amount', 'Balance'])
-# print(Santander_df.head())
 
 #Open files within Statements
 for filename in os.listdir(directory):
@@ -22,7 +21,7 @@ for filename in os.listdir(directory):
         for line in file:
             #Parse for "Date" , "Amount", "Balance"
             if ("Date" in line):
-                df_date_entry = line.split(':')        #Remove "Date:"
+                df_date_entry = line.split(':')                   #Remove "Date:"
                 df_date_entry = df_date_entry[1].replace(" ", "") #Remove white space
                 df_date_entry = df_date_entry.replace("\n", "")   #Remove \n
                 # print(df_date_entry)
@@ -49,4 +48,4 @@ for filename in os.listdir(directory):
                 df_entry_number = df_entry_number + 1
 
 print("Saving... Santander_df.pkl")       
-Santander_df.to_pickle("Santander_df1.pkl")
+Santander_df.to_pickle(output_filename)
